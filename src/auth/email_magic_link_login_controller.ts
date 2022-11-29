@@ -66,7 +66,7 @@ export default class EmailMagicLinkLoginController {
         let magicLink = await this.magicLinkRepository.findOne(magic);
         if (!magicLink){
             
-            res.redirect(401, "http://localhost:8080")
+            res.redirect(401, process.env.FRONTEND_URL || "http://localhost:8080")
             return
         }
 
@@ -81,7 +81,7 @@ export default class EmailMagicLinkLoginController {
         await this.magicLinkRepository.delete(magic);
 
         res.cookie(process.env.LOGIN_TOKEN_KEY || 'lit', refreshToken, {maxAge: 86_400_000, httpOnly: true})
-        res.redirect(301, "http://localhost:8080")
+        res.redirect(301, process.env.FRONTEND_URL || "http://localhost:8080")
     }
 
 }

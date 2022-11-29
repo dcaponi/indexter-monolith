@@ -9,7 +9,7 @@ export default class UserController {
     userDB: UserRepository;
     magicLinkRepository: MagicLinkRepository;
     emailer: Emailer;
-    magicLinkUrl = process.env.MAGIC_LINK_URL || "http://localhost:3000/login"
+    magicLinkUrl = `${process.env.MAGIC_LINK_URL || "http://localhost:3000"}/login`
 
     constructor(userDB: UserRepository, magicLinkRepository: MagicLinkRepository, emailer: Emailer) {
         this.userDB = userDB;

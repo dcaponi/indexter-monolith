@@ -21,7 +21,7 @@ export default class IntegrationController {
         let token = await this.integration.codeToCreds(code);
         if (!token) {
             console.log("no token returned from source")
-            res.redirect(500, "http://localhost:8080");
+            res.redirect(500, process.env.FRONTEND_URL || "http://localhost:8080");
             return;
         }
 
@@ -29,7 +29,7 @@ export default class IntegrationController {
 
         try {
             await this.db.upsert(token);
-            res.redirect(301, "http://localhost:8080/links");
+            res.redirect(301, `${process.env.FRONTEND_URL || "http://localhost:8080"}/links`);
         } catch (e) {
             res.status(500).json({ message: "unexpected error" })
         }

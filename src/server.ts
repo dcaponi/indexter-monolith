@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 /** CORS Stuff **/
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://127.0.0.1:8080', 'http://localhost:8080' /* other prod domains */];
+  const allowedOrigins = ['http://127.0.0.1:8080', 'http://localhost:8080', 'https://indexter.tech' /* other prod domains */];
   const origin = req.headers.origin || '';
 
   if (allowedOrigins.includes(origin)) {
