@@ -1,11 +1,7 @@
-import { Email, NodeEmailer }from "./emailer";
+import {Email, NodeEmailer} from './emailer';
 
 interface Emailer {
-    send(email: Email): void
+  send(email: Email): void;
 }
 
-export {
-    Email,
-    NodeEmailer,
-    Emailer
-}
+export {Email, NodeEmailer, Emailer};

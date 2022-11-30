@@ -1,3 +1,3 @@
 export type LoggedInUser = {
-    email: string
-}
+  email: string;
+};

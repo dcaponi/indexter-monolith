@@ -5,4 +5,4 @@ COPY package.json ./
 RUN npm install
 COPY . .
 EXPOSE 3000
-CMD [ "node" "build/server.js" ]
+CMD [ "node", "build/server.js" ]
