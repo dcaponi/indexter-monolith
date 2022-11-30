@@ -34,7 +34,8 @@ app.use((req, res, next) => {
   const allowedOrigins = [
     'http://127.0.0.1:8080',
     'http://localhost:8080',
-    'https://www.indexter.tech' /* other prod domains */,
+    'https://www.indexter.tech',
+    'https://indexter.tech' /* other prod domains */,
   ];
   const origin = req.headers.origin || '';
 
@@ -51,9 +52,12 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET, PATCH, DELETE, POST');
     return res.status(200).json({});
   }
-  console.log("allow-origin-header", res.getHeader('Access-Control-Allow-Origin'))
-  console.log("req origin", origin)
-  console.log("allowed origin", allowedOrigins.includes(origin))
+  console.log(
+    'allow-origin-header',
+    res.getHeader('Access-Control-Allow-Origin')
+  );
+  console.log('req origin', origin);
+  console.log('allowed origin', allowedOrigins.includes(origin));
   next();
 });
 
