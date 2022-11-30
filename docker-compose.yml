@@ -7,9 +7,6 @@ services:
     container_name: api
     build: .
     command: npm run dev
-    depends_on:
-      - "elasticsearch"
-      - "database"
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
