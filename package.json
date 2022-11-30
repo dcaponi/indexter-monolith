@@ -16,6 +16,7 @@
     "posttest": "npm run lint",
     "dev": "nodemon src/server.ts",
     "build": "rm -rf build/ && prettier --write src/ && tsc",
+    "deploy": "npm run build && docker build . -t dcaponi1/indexter:latest && docker push dcaponi1/indexter:latest",
     "start": "npm run build && node build/server.js"
   },
   "devDependencies": {

@@ -37,7 +37,7 @@ app.use((req, res, next) => {
     'https://www.indexter.tech' /* other prod domains */,
   ];
   const origin = req.headers.origin || '';
-  console.log(origin);
+
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
@@ -45,12 +45,13 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header(
     'Access-Control-Allow-Headers',
-    'origin, X-Requested-With,Content-Type,Accept, Authorization'
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'GET, PATCH, DELETE, POST');
     return res.status(200).json({});
   }
+
   next();
 });
 
