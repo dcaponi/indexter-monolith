@@ -51,7 +51,9 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET, PATCH, DELETE, POST');
     return res.status(200).json({});
   }
-
+  console.log("allow-origin-header", res.getHeader('Access-Control-Allow-Origin'))
+  console.log("req origin", origin)
+  console.log("allowed origin", allowedOrigins.includes(origin))
   next();
 });
 
