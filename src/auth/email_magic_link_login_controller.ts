@@ -94,7 +94,7 @@ export default class EmailMagicLinkLoginController {
     res.cookie(process.env.LOGIN_TOKEN_KEY || 'lit', refreshToken, {
       maxAge: 86_400_000,
       httpOnly: true,
-      sameSite: "strict",
+      sameSite: 'strict',
       secure: true,
     });
     res.redirect(301, process.env.FRONTEND_URL || 'http://localhost:8080');

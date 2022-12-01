@@ -56,8 +56,6 @@ app.use((req, res, next) => {
     'allow-origin-header',
     res.getHeader('Access-Control-Allow-Origin')
   );
-  console.log('req origin', origin);
-  console.log('allowed origin', allowedOrigins.includes(origin));
   next();
 });
 

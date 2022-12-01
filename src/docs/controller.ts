@@ -19,9 +19,9 @@ export default class DocsController {
       return res.status(200).json({challenge: req.body.challenge});
     }
 
-    if(req.body.event) {
+    if (req.body.event) {
       text = req.body.event.text;
-      teamId = req.body.event.team
+      teamId = req.body.event.team;
     } else {
       text = req.body.text;
       teamId = req.body.team_id;
