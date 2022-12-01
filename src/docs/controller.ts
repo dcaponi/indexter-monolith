@@ -12,12 +12,21 @@ export default class DocsController {
   }
   // Hack - needed to do this to test the slack command for the demo
   slackSearch = async (req: Request, res: Response, next: NextFunction) => {
+    let text;
+    let teamId;
+
     if (req.body.challenge) {
-      return res.status(200).json({ challenge: req.body.challenge });
+      return res.status(200).json({challenge: req.body.challenge});
     }
 
-    let text = req.body.event ? req.body.event.text : req.body.text;
-    let teamId = req.body.team_id || req.body.event.team;
+    if(req.body.event) {
+      text = req.body.event.text;
+      teamId = req.body.event.team
+    } else {
+      text = req.body.text;
+      teamId = req.body.team_id;
+    }
+
     let creds = await this.credsRepo.find({
       alt_user_id: teamId,
       source: 'slack',
