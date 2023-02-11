@@ -32,7 +32,7 @@ export default class IntegrationController {
 
     token.email = state;
 
-    console.log(token.email)
+    console.log(token.email);
     try {
       await this.db.upsert(token);
       res.redirect(

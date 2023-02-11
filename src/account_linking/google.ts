@@ -12,10 +12,10 @@ export default class GoogleIntegration implements Integration {
   );
 
   constructor() {
-    this.authUrl = ""
+    this.authUrl = '';
   }
 
-  generateAuthUrl(email: string){
+  generateAuthUrl(email: string) {
     this.authUrl = this.googleOauth2Client.generateAuthUrl({
       scope: [
         'https://www.googleapis.com/auth/drive.readonly',
@@ -26,7 +26,7 @@ export default class GoogleIntegration implements Integration {
       prompt: 'consent',
       state: email,
     });
-    return this.authUrl
+    return this.authUrl;
   }
 
   async codeToCreds(code: string): Promise<Credentials | null> {

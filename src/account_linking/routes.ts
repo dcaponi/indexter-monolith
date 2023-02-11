@@ -33,14 +33,8 @@ const accountLinkingRoutes = (pc: PoolClient) => {
   );
 
   router
-    .get(
-      '/code/google',
-      googleIntegrationController.exchangeAuthCode
-    )
-    .get(
-      '/code/atlassian',
-      atlassianIntegrationController.exchangeAuthCode
-    )
+    .get('/code/google', googleIntegrationController.exchangeAuthCode)
+    .get('/code/atlassian', atlassianIntegrationController.exchangeAuthCode)
     .get('/code/slack', slackIntegrationController.exchangeAuthCode)
     .get(
       '/links',
@@ -49,11 +43,15 @@ const accountLinkingRoutes = (pc: PoolClient) => {
         let email: string = res.locals.loggedInUser.email;
         let links: Links = {
           google: {
-            linkURL: googleIntegration.generateAuthUrl(res.locals.loggedInUser.email),
+            linkURL: googleIntegration.generateAuthUrl(
+              res.locals.loggedInUser.email
+            ),
             linked: false,
           },
           atlassian: {
-            linkURL: atlassianIntegration.generateAuthUrl(res.locals.loggedInUser.email),
+            linkURL: atlassianIntegration.generateAuthUrl(
+              res.locals.loggedInUser.email
+            ),
             linked: false,
           },
           slack: {
