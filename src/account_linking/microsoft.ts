@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {Credentials, Integration} from '.';
 
-export default class AtlassianIntegration implements Integration {
-  public source = 'atlassian';
+export default class MicrosoftIntegration implements Integration {
+  public source = 'microsoft';
   public authUrl: string;
 
   constructor() {

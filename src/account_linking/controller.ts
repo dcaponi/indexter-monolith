@@ -21,6 +21,7 @@ export default class IntegrationController {
   ) => {
     let q = url.parse(req.url, true).query;
     let code = q.code as string;
+    let state = q.state as string;
 
     let token = await this.integration.codeToCreds(code);
     if (!token) {
@@ -29,10 +30,9 @@ export default class IntegrationController {
       return;
     }
 
-    token.email = res.locals.loggedInUser
-      ? res.locals.loggedInUser.email
-      : 'd.caponi1@gmail.com';
+    token.email = state;
 
+    console.log(token.email)
     try {
       await this.db.upsert(token);
       res.redirect(

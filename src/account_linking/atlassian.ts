@@ -27,11 +27,15 @@ export default class AtlassianIntegration implements Integration {
     let clientId = `client_id=${process.env.ATLASSIAN_CLIENT_ID}`;
     let redirect_uri = `redirect_uri=${process.env.ATLASSIAN_CALLBACK_URL}`;
     let audience = `audience=api.atlassian.com`;
-    let state = `state=todo_something_pkceish`; //todo generate this and validate it on /code request
     let response_type = `response_type=code`;
     let prompt = `prompt=consent`;
 
-    this.authUrl = `${auth_base_url}?${clientId}&${scope}&${redirect_uri}&${audience}&${state}&${response_type}&${prompt}`;
+    this.authUrl = `${auth_base_url}?${clientId}&${scope}&${redirect_uri}&${audience}&${response_type}&${prompt}`;
+  }
+
+  generateAuthUrl(email: string) {
+    this.authUrl += `&state=${email}`;
+    return this.authUrl;
   }
 
   async codeToCreds(code: string): Promise<Credentials | null> {
