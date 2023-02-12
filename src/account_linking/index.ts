@@ -32,6 +32,7 @@ type Credentials = {
 type Links = {
   google: Link;
   atlassian: Link;
+  microsoft: Link;
   slack: Link;
 };
 

@@ -19,7 +19,13 @@ export default class ImportController {
       return res.status(500).json({
         message: `unable to reach document source`,
       });
-    } else {
+    } 
+    if (docs.length < 1) {
+      return res.status(200).json({
+        message: `no docs to index`,
+      });
+    }
+    if (docs && docs.length > 0) {
       this.docsRepo.bulkCreate(email, docs);
       // todo return a status ding dong for the client to poll
       return res.status(200).json({

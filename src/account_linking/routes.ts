@@ -10,12 +10,14 @@ import {
 } from '.';
 import {Request, Response, NextFunction} from 'express-serve-static-core';
 import {jwtCookieAuth} from '../lib/auth/jwt_auth/jwt_cookie_auth_middleware';
+import MicrosoftIntegration from './microsoft';
 
 const accountLinkingRoutes = (pc: PoolClient) => {
   let router = express.Router();
 
   const googleIntegration = new GoogleIntegration();
   const atlassianIntegration = new AtlassianIntegration();
+  const microsoftIntegration = new MicrosoftIntegration();
   const slackIntegration = new SlackIntegration();
   const credentialsRepository = new CredentialsRepository(pc);
 
@@ -27,6 +29,10 @@ const accountLinkingRoutes = (pc: PoolClient) => {
     atlassianIntegration,
     credentialsRepository
   );
+  const microsoftIntegrationController = new IntegrationController(
+    microsoftIntegration,
+    credentialsRepository
+  );
   const slackIntegrationController = new IntegrationController(
     slackIntegration,
     credentialsRepository
@@ -35,6 +41,7 @@ const accountLinkingRoutes = (pc: PoolClient) => {
   router
     .get('/code/google', googleIntegrationController.exchangeAuthCode)
     .get('/code/atlassian', atlassianIntegrationController.exchangeAuthCode)
+    .get('/code/microsoft', microsoftIntegrationController.exchangeAuthCode)
     .get('/code/slack', slackIntegrationController.exchangeAuthCode)
     .get(
       '/links',
@@ -50,6 +57,12 @@ const accountLinkingRoutes = (pc: PoolClient) => {
           },
           atlassian: {
             linkURL: atlassianIntegration.generateAuthUrl(
+              res.locals.loggedInUser.email
+            ),
+            linked: false,
+          },
+          microsoft: {
+            linkURL: microsoftIntegration.generateAuthUrl(
               res.locals.loggedInUser.email
             ),
             linked: false,
