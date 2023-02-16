@@ -96,6 +96,19 @@ export default class DocsController {
     }
   };
 
+  delete = async (req: Request, res: Response, next: NextFunction) => {
+    let source = req.query.source as string;
+    let owner = res.locals.loggedInUser.email;
+    if (source) {
+      try {
+        let deleteResult = await this.docsRepo.deleteBySource(owner, source);
+        return res.status(200).json({message: deleteResult})
+      } catch (e) {
+        return res.status(500).json({message: "unexpected error"})
+      }
+    }
+  }
+
   search = async (req: Request, res: Response, next: NextFunction) => {
     let text = req.body.text || req.query.text;
     let owner = res.locals.loggedInUser.email;

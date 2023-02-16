@@ -12,6 +12,7 @@ const docsRoutes = (pc: PoolClient, es: ESClient) => {
   let credsRepo = new CredentialsRepository(pc);
   let docsController = new DocsController(credsRepo, docsRepo);
   router.route('/').get(jwtCookieAuth, docsController.search);
+  router.route('/').delete(jwtCookieAuth, docsController.delete);
   router.route('/slack').post(docsController.slackSearch); // slack uses this
   return router;
 };
