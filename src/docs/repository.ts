@@ -27,16 +27,16 @@ export default class DocsRepository extends OwnedESIndexBaseRepository<
   }
 
   async deleteBySource(owner: string, source: string): Promise<string> {
-    console.log("repo")
+    console.log('repo');
     let res = await this.pc.deleteByQuery({
       index: owner + '_' + this.idx,
       query: {
         fuzzy: {
           source,
-        }
+        },
       },
     });
-    return `deleted ${res.total} docs belonging to ${source}`
+    return `deleted ${res.total} docs belonging to ${source}`;
   }
 
   async bulkCreate(owner: string, items: Doc[]): Promise<ESResult> {

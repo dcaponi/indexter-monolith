@@ -19,7 +19,7 @@ export default class ImportController {
       return res.status(500).json({
         message: `unable to reach document source`,
       });
-    } 
+    }
     if (docs.length < 1) {
       return res.status(200).json({
         message: `no docs to index`,

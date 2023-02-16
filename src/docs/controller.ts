@@ -102,12 +102,12 @@ export default class DocsController {
     if (source) {
       try {
         let deleteResult = await this.docsRepo.deleteBySource(owner, source);
-        return res.status(200).json({message: deleteResult})
+        return res.status(200).json({message: deleteResult});
       } catch (e) {
-        return res.status(500).json({message: "unexpected error"})
+        return res.status(500).json({message: 'unexpected error'});
       }
     }
-  }
+  };
 
   search = async (req: Request, res: Response, next: NextFunction) => {
     let text = req.body.text || req.query.text;
